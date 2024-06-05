@@ -22,7 +22,7 @@ class ShowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fields' => 'nullable|array|in:id,images,created_at,updated_at'
+            'fields' => 'nullable|array|in:id,description,images,created_at'
         ];
     }
 }
