@@ -72,7 +72,7 @@ class AnnouncementTest extends TestCase
         Announcement::factory(20)->create();
         $announcement = Announcement::first();
         $fields = ['id','created_at'];
-        $response = $this->get(route('announcement.show', [
+        $response = $this->post(route('announcement.show', [
             'fields' => $fields,
             'announcement' => $announcement->id
         ]));
