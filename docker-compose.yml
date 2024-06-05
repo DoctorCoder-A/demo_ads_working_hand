@@ -52,22 +52,6 @@ services:
           - 'db_mysql:/var/lib/mysql'
         networks:
           - network
-# phpmyadmin
-    phpmyadmin:
-      image: phpmyadmin/phpmyadmin:latest
-      container_name: ${PROJECT_NAME}-phpmyadmin
-      restart: unless-stopped
-      ports:
-        - "8080:80"
-      environment:
-        - PMA_HOST=${DB_HOST}
-        - PMA_USER=${DB_USERNAME}
-        - PMA_PASSWORD=${DB_PASSWORD}
-        - UPLOAD_LIMIT=30M
-      depends_on:
-        - db
-      networks:
-        - network
 networks:
     network:
         driver: bridge

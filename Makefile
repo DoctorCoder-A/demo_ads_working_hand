@@ -19,19 +19,26 @@ docker-up:
 	${docker_composer} up -d --remove-orphans
 docker-down-clean:
 	${docker_composer} down -v --remove-orphans
-
-app-init: composer-update artisan-key-generate
+app-init: composer-update  artisan-key-generate  artisan-storage-link migrate-seed npm-install npm-build
 
 composer-update:
 	${docker_composer} exec app composer update
 artisan-key-generate:
 	${docker_composer} exec app php artisan key:generate
 artisan-storage-link:
-	([ -L "public/storage" ] && rm -r public/storage) && ([ -d "storage/app/public" ] || mkdir storage/app/public) && ${docker_composer} exec app php artisan storage:link
+	rm -r public/storage; ${docker_composer} exec app php artisan storage:link
 sh:
 	${docker_composer} exec app sh
+npm-install:
+	${docker_composer} exec app npm install
+npm-build:
+	${docker_composer} exec app  npm run build
+npm-dev:
+	${docker_composer} exec app npm run
 migrate:
 	${docker_composer} exec app php artisan migrate:fresh
+migrate-seed:
+	${docker_composer} exec app php artisan migrate --seed
 tinker:
 	${docker_composer} exec app php artisan tinker
 test:
