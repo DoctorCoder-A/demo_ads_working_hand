@@ -34,7 +34,7 @@ npm-install:
 npm-build:
 	${docker_composer} exec app  npm run build
 npm-dev:
-	${docker_composer} exec app npm run
+	${docker_composer} exec app npm run dev
 migrate:
 	${docker_composer} exec app php artisan migrate:fresh
 migrate-seed:
